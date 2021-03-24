@@ -2,6 +2,7 @@ package com.dorotajachtoma.tacocloud.controller;
 
 
 import com.dorotajachtoma.tacocloud.model.Ingredient;
+import com.dorotajachtoma.tacocloud.model.Taco;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ public class DesignTacoController {
 
     @GetMapping
     public String showDesignForm(Model model){
+
         List<Ingredient> ingredients = Arrays.asList(
                 new Ingredient("FLTO","Flour Torilla", Ingredient.Type.WRAP),
                 new Ingredient("COTO", "Corn Tortilla", Ingredient.Type.WRAP),
@@ -32,5 +34,6 @@ public class DesignTacoController {
         );
         model.addAttribute("ingredients",ingredients);
         model.addAttribute("design", new Taco());
+        return "design";
     }
 }
