@@ -8,9 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -32,7 +32,11 @@ public class DesignTacoController {
                 new Ingredient("SLSA", "Salsa", Ingredient.Type.SAUCE),
                 new Ingredient("SRCR", "Sour Cream", Ingredient.Type.SAUCE)
         );
-        model.addAttribute("ingredients",ingredients);
+        Ingredient.Type[] types = Ingredient.Type.values();
+        for(Ingredient.Type type : types){
+            model.addAttribute(type.toString().toLowerCase(),
+                    ingredients.stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList()));
+        }
         model.addAttribute("design", new Taco());
         return "design";
     }
