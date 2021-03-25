@@ -7,4 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Data
 @RequestMapping
 public class Taco {
+
+    private String name;
 }

@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Data
 @RequiredArgsConstructor
 public class Ingredient {
