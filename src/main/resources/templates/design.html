@@ -18,7 +18,6 @@
             <div th:each="ingredient : ${protein}">
                 <input name="ingredients" type="checkbox" th:value="${ingredient.id}">
                 <span th:text="${ingredient.name}">INGREDIENT</span>
-
             </div>
             <h3>Pick your cheese:</h3>
             <div th:each="ingredient : ${cheese}">
@@ -35,7 +34,6 @@
                 <input name="ingredients" type="checkbox" th:value="${ingredient.id}">
                 <span th:text="${ingredient.name}">INGREDIENT</span>
             </div>
-
             <h3>Name your taco creation!</h3>
             <input type="text" th:field="*{name}"/>
             <br/>
