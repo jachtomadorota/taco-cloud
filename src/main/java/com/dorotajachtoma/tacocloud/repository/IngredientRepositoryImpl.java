@@ -3,10 +3,12 @@ package com.dorotajachtoma.tacocloud.repository;
 import com.dorotajachtoma.tacocloud.model.Ingredient;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Repository
 public class IngredientRepositoryImpl implements IngredientRepository {
 
     private final JdbcTemplate jdbc;
