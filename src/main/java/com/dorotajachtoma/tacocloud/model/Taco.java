@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @RequestMapping
@@ -12,7 +13,9 @@ public class Taco {
 
     private Long id;
 
-    private Date createaAt;
+    private Date createdAt;
 
     private String name;
+
+    private List<Ingredient> ingredients;
 }

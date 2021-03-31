@@ -25,15 +25,20 @@ public class TacoRepositoryImpl implements TacoRepository{
 
     @Override
     public Taco save(Taco design) {
-        return null;
+        long tacoId = saveTacoInfo(design);
+        design.setId(tacoId);
+        for(Ingredient ingredient : design.getIngredients()){
+            saveIngredientToTaco(ingredient,tacoId);
+        }
+        return design;
     }
 
     private long saveTacoInfo(Taco taco){
-        taco.setCreateaAt(new Date());
+        taco.setCreatedAt(new Date());
         PreparedStatementCreator psc = new PreparedStatementCreatorFactory(
                 "INSERT INTO Taco (name,createdAt) VALUES (?,?)",
                 Types.VARCHAR,Types.TIMESTAMP).newPreparedStatementCreator(
-                Arrays.asList(taco.getName(),new Timestamp(taco.getCreateaAt().getTime())));
+                Arrays.asList(taco.getName(),new Timestamp(taco.getCreatedAt().getTime())));
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbc.update(psc,keyHolder);
         return keyHolder.getKey().longValue();
