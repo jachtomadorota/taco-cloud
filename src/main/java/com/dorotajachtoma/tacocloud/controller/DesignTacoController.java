@@ -2,17 +2,16 @@ package com.dorotajachtoma.tacocloud.controller;
 
 
 import com.dorotajachtoma.tacocloud.model.Ingredient;
+import com.dorotajachtoma.tacocloud.model.Order;
 import com.dorotajachtoma.tacocloud.model.Taco;
 import com.dorotajachtoma.tacocloud.repository.IngredientRepository;
+import com.dorotajachtoma.tacocloud.repository.TacoRepositoryImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -27,9 +26,11 @@ import java.util.stream.Collectors;
 public class DesignTacoController {
 
     private final IngredientRepository ingredientRepository;
+    private final TacoRepositoryImpl tacoRepository;
 
-    public DesignTacoController(IngredientRepository ingredientRepository) {
+    public DesignTacoController(IngredientRepository ingredientRepository, TacoRepositoryImpl tacoRepository) {
         this.ingredientRepository = ingredientRepository;
+        this.tacoRepository = tacoRepository;
     }
 
     @GetMapping
@@ -47,11 +48,12 @@ public class DesignTacoController {
     }
 
     @PostMapping
-    public String processDesign(@Valid Taco design, Errors errors){
+    public String processDesign(@Valid Taco design, Errors errors, @ModelAttribute Order order){
         if(errors.hasErrors()){
             return "design";
         }else {
             log.info("Processing design : " + design);
+            Taco saved = tacoRepository.save(design);
         }
         return "redirect:/orders/current";
     }
