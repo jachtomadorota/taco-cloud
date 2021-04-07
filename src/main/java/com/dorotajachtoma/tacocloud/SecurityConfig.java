@@ -28,6 +28,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/design","/orders")
                 .hasRole("ROLE_USER")
-                .antMatchers("/","/**").permitAll();
+                .antMatchers("/","/**").permitAll()
+                .and()
+                .formLogin()
+                .loginPage("/login");
+
+        /*
+        http.authorizeRequest()
+        .antMatcher("/design","/order")
+        .access("hasRole('ROLE_USER')")
+        .antiMatchers("/","/**").access("permitAll");
+         */
     }
 }
