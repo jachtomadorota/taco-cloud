@@ -1,6 +1,8 @@
 package com.dorotajachtoma.tacocloud.controller;
 
 
+import com.dorotajachtoma.tacocloud.model.RegistrationForm;
+import com.dorotajachtoma.tacocloud.model.User;
 import com.dorotajachtoma.tacocloud.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -27,7 +29,8 @@ public class RegistrationController {
 
     @PostMapping
     public String processRegistration(RegistrationForm form){
-        userRepository.save(form.toUser(passwordEncoder));
+        User user = form.toUser(passwordEncoder);
+        userRepository.save(user);
         return "redirect:/login";
     }
 }
