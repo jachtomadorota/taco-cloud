@@ -5,16 +5,19 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 
 @Data
-@RequiredArgsConstructor
-public class Order {
+@Entity
+public class Order implements Serializable {
 
     private Long id;
 
@@ -45,4 +48,7 @@ public class Order {
     private Date createdAt;
 
     private List<Taco> tacos;
+
+    @ManyToOne
+    private User user;
 }

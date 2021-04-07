@@ -14,7 +14,7 @@ import java.util.Collection;
 
 @Entity
 @Data
-@NoArgsConstructor(access = AccessLevel.PRIVATE,force = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED,force = true)
 @RequiredArgsConstructor
 public class User implements UserDetails {
 
@@ -43,6 +43,7 @@ public class User implements UserDetails {
         this.zip = zip;
         this.phoneNumber = phoneNumber;
     }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
