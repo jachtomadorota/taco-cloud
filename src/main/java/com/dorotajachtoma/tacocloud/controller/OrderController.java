@@ -3,9 +3,10 @@ package com.dorotajachtoma.tacocloud.controller;
 
 import com.dorotajachtoma.tacocloud.model.Order;
 import com.dorotajachtoma.tacocloud.model.User;
-import com.dorotajachtoma.tacocloud.repository.OrderRepositoryImpl;
+import com.dorotajachtoma.tacocloud.repository.OrderRepository;
 import com.dorotajachtoma.tacocloud.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -22,10 +23,10 @@ import java.security.Principal;
 @RequestMapping(value = "/orders")
 public class OrderController {
 
-    private final OrderRepositoryImpl orderRepository;
+    private final OrderRepository orderRepository;
     private final UserRepository userRepository;
 
-    public OrderController(OrderRepositoryImpl orderRepository, UserRepository userRepository) {
+    public OrderController(OrderRepository orderRepository, UserRepository userRepository) {
         this.orderRepository = orderRepository;
         this.userRepository = userRepository;
     }
@@ -47,5 +48,10 @@ public class OrderController {
         sessionStatus.setComplete();
         return "redirect:/";
 
+    }
+
+    @GetMapping
+    public String ordersForUser(@AuthenticationPrincipal User user, Model model){
+        return "orderList";
     }
 }
