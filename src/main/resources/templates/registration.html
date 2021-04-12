@@ -8,7 +8,7 @@
 <h1>Register</h1>
 <img th:src="@{/images/TacoCloud.png}"/>
 
-<form method="POST" th:action="@{/register}" id="registerForm">
+<form method="POST" th:action="@{/register}" id="user" th:object="${user}">
     <label for="username">Username</label>
     <input type="text" name="username" id="username"><br/>
 
