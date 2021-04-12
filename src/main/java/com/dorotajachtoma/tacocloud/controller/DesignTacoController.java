@@ -5,6 +5,7 @@ import com.dorotajachtoma.tacocloud.model.Ingredient;
 import com.dorotajachtoma.tacocloud.model.Order;
 import com.dorotajachtoma.tacocloud.model.Taco;
 import com.dorotajachtoma.tacocloud.repository.IngredientRepository;
+import com.dorotajachtoma.tacocloud.repository.TacoRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,9 +24,9 @@ import java.util.stream.Collectors;
 public class DesignTacoController {
 
     private final IngredientRepository ingredientRepository;
-    private final TacoRepositoryImpl tacoRepository;
+    private final TacoRepository tacoRepository;
 
-    public DesignTacoController(IngredientRepository ingredientRepository, TacoRepositoryImpl tacoRepository) {
+    public DesignTacoController(IngredientRepository ingredientRepository, TacoRepository tacoRepository) {
         this.ingredientRepository = ingredientRepository;
         this.tacoRepository = tacoRepository;
     }
