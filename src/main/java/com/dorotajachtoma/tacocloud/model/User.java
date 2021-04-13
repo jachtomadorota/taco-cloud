@@ -1,8 +1,6 @@
 package com.dorotajachtoma.tacocloud.model;
 
 import lombok.*;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

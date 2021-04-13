@@ -3,6 +3,7 @@ package com.dorotajachtoma.tacocloud.controller;
 
 import com.dorotajachtoma.tacocloud.model.User;
 import com.dorotajachtoma.tacocloud.repository.UserRepository;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -30,7 +31,7 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String processRegistration(@Valid User user, Errors errors){
+    public String processRegistration(@AuthenticationPrincipal User user, Errors errors){
         if(errors.hasErrors()){
             return "registration";
         }else{
