@@ -35,11 +35,12 @@ public class TacoOrderController {
 
     @GetMapping(value = "/current")
     public String orderForm(Model model){
+        model.addAttribute("tacoOrder",new TacoOrder());
         return "orderForm";
     }
 
     //it's possible to use second option - @AuthenticationPrincipal User user object instead of Principal to retrieve current logged user and his role
-    @PostMapping
+    @PostMapping(value = "/current")
     public String processOrder(@Valid TacoOrder tacoOrder, Errors errors, SessionStatus sessionStatus, Principal principal){
         if(errors.hasErrors()){
             return "orderForm";

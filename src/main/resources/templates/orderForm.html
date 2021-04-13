@@ -13,59 +13,60 @@
     <input type="submit" value="Logout">
 </form>
 <br/>
-    <form method="POST" th:action="@{/orders}" th:object="${tacoOrder}">
+    <form method="POST" th:action="@{/orders/current}" th:object="${tacoOrder}">
         <h1>Order your taco creation!</h1>
         <a th:href="@{/design}" id="another">Design another taco</a>
+        <input type="hidden" th:field="*{id}" id="id"/>
 
         <div th:if="${#fields.hasErrors()}">
             <span>Please correct the problems below and resubmit</span>
         </div>
             <h3>Deliver my taco masterpiece to..</h3>
             <label for="name">Name: </label>
-            <input type="text" th:field="*{name}"/>
+            <input type="text" th:field="*{name}" id="name"/>
             <span th:if="${#fields.hasErrors('name')}"
               th:errors="*{name}">Name Error</span>
             <br/>
 
             <label for="street">Street address: </label>
-            <input type="text" th:field="*{street}">
+            <input type="text" th:field="*{street}" id="street">
             <span th:if="${#fields.hasErrors('street')}"
               th:errors="*{street}">Street Error</span>
             <br/>
 
             <label for="city">City: </label>
-            <input type="text" th:field="*{city}">
+            <input type="text" th:field="*{city}" id="city">
             <span th:if="${#fields.hasErrors('city')}"
               th:errors="*{city}">City Error</span>
             <br/>
 
             <label for="state">State: </label>
-            <input type="text" th:field="*{state}">
+            <input type="text" th:field="*{state}" id="state">
             <span th:if="${#fields.hasErrors('state')}"
               th:errors="*{state}">State Error</span>
             <br/>
 
             <label for="zip">Zip Code: </label>
-            <input type="text" th:field="*{zip}">
+            <input type="text" th:field="*{zip}" id="zip">
             <span th:if="${#fields.hasErrors('zip')}"
               th:errors="*{zip}">Zip Code Error</span>
             <br/>
 
             <h3>Here is how I'll pay...</h3>
             <label for="ccNumber">Credit card #: </label>
-            <input type="text" th:field="*{ccNumber}">
+            <input type="text" th:field="*{ccNumber}" id="ccNumber">
             <span th:if="${#fields.hasErrors('ccNumber')}"
               th:errors="*{ccNumber}">CC Number Error</span>
             <br/>
 
             <label for="ccExpiration">Expiration: </label>
-            <input type="text" th:field="*{ccExpiration}">
+            <input type="text" th:field="*{ccExpiration}" id="ccExpiration">
              <span th:if="${#fields.hasErrors('ccExpiration')}"
               th:errors="*{ccExpiration}">CC Expiration Error</span>
             <br/>
 
             <label for="ccCVV">CVV: </label>
-            <input type="text" th:field="*{ccCVV}">
+            <input type="text" th:field="*{ccCVV}" id="ccCVV">
             <span th:if="${#fields.hasErrors('ccCVV')}"
               th:errors="*{ccCVV}">CC CVV Error</span>
             <br/>

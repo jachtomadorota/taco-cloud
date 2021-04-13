@@ -13,7 +13,7 @@
     <input type="submit" value="Logout">
 </form>
 <br/>
-        <form method="POST" th:object="${design}">
+        <form method="POST" th:object="${design}" th:action="@{/design}">
             <h3>Design your own wrap!</h3>
             <div th:each="ingredient : ${wrap}">
                 <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
