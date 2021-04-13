@@ -13,7 +13,7 @@
     <input type="submit" value="Logout">
 </form>
 <br/>
-    <form method="POST" th:action="@{/orders}" th:object="${order}">
+    <form method="POST" th:action="@{/orders}" th:object="${tacoOrder}">
         <h1>Order your taco creation!</h1>
         <a th:href="@{/design}" id="another">Design another taco</a>
 
@@ -70,7 +70,7 @@
               th:errors="*{ccCVV}">CC CVV Error</span>
             <br/>
 
-        <button>Submit order</button>
+        <button>Submit tacoOrder</button>
             <br/>
 
     </form>

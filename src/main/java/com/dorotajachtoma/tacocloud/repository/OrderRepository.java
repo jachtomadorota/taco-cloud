@@ -1,7 +1,7 @@
 package com.dorotajachtoma.tacocloud.repository;
 
 
-import com.dorotajachtoma.tacocloud.model.Order;
+import com.dorotajachtoma.tacocloud.model.TacoOrder;
 import com.dorotajachtoma.tacocloud.model.User;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,8 +13,8 @@ import java.util.List;
 
 @Repository
 @Transactional
-public interface OrderRepository extends JpaRepository<Order,Long> {
+public interface OrderRepository extends JpaRepository<TacoOrder,Long> {
 
-    @Query(value = "SELECT * FROM order where user_id =? ORDER BY createdAt desc;",nativeQuery = true)
-    List<Order> findOrderbyUserOrderByCreatedAtDesc(User user, Pageable pageable);
+    @Query(value = "SELECT * FROM tacoorder where user_id =? ORDER BY createdAt desc;",nativeQuery = true)
+    List<TacoOrder> findOrderbyUserOrderByCreatedAtDesc(User user, Pageable pageable);
 }

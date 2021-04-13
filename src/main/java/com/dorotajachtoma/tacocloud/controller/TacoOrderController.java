@@ -1,7 +1,7 @@
 package com.dorotajachtoma.tacocloud.controller;
 
 
-import com.dorotajachtoma.tacocloud.model.Order;
+import com.dorotajachtoma.tacocloud.model.TacoOrder;
 import com.dorotajachtoma.tacocloud.model.User;
 import com.dorotajachtoma.tacocloud.repository.OrderRepository;
 import com.dorotajachtoma.tacocloud.repository.UserRepository;
@@ -23,12 +23,12 @@ import java.security.Principal;
 @Controller
 @Slf4j
 @RequestMapping(value = "/orders")
-public class OrderController {
+public class TacoOrderController {
 
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
 
-    public OrderController(OrderRepository orderRepository, UserRepository userRepository) {
+    public TacoOrderController(OrderRepository orderRepository, UserRepository userRepository) {
         this.orderRepository = orderRepository;
         this.userRepository = userRepository;
     }
@@ -40,13 +40,13 @@ public class OrderController {
 
     //it's possible to use second option - @AuthenticationPrincipal User user object instead of Principal to retrieve current logged user and his role
     @PostMapping
-    public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus, Principal principal){
+    public String processOrder(@Valid TacoOrder tacoOrder, Errors errors, SessionStatus sessionStatus, Principal principal){
         if(errors.hasErrors()){
             return "orderForm";
         }
         User user = userRepository.findByUsername(principal.getName());
-        order.setUser(user);
-        orderRepository.save(order);
+        tacoOrder.setUser(user);
+        orderRepository.save(tacoOrder);
         sessionStatus.setComplete();
         return "redirect:/";
 

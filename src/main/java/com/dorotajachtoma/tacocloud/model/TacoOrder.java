@@ -20,7 +20,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order implements Serializable {
+public class TacoOrder implements Serializable {
 
 
     @Id
