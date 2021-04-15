@@ -33,6 +33,7 @@ public class HomeController {
                 new Ingredient(9L,"SLSA", "Salsa", Ingredient.Type.SAUCE),
                 new Ingredient(10L,"SRCR", "Sour Cream", Ingredient.Type.SAUCE)
         );
-        repository.saveAll(ingredients);return "home";
+        repository.saveAll(ingredients);
+        return "home";
     }
 }

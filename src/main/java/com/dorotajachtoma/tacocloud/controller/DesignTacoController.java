@@ -9,6 +9,7 @@ import com.dorotajachtoma.tacocloud.repository.TacoRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,20 +35,19 @@ public class DesignTacoController {
 
     @GetMapping
     public String showDesignForm(Model model){
-        List<Ingredient> ingredients = new ArrayList<>();
-        ingredientRepository.findAll().forEach(ingredients::add);
+
         Ingredient.Type[] types = Ingredient.Type.values();
         for(Ingredient.Type type : types){
             model.addAttribute(type.toString().toLowerCase(),
-                    ingredients.stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList()));
+                    ingredientRepository.findAll().stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList()));
         }
         model.addAttribute("design", new Taco());
         return "design";
     }
 
     @PostMapping
-    public String processDesign(@Valid Taco design, Errors errors, @ModelAttribute TacoOrder tacoOrder){
-        if(errors.hasErrors()){
+    public String processDesign(@Valid @ModelAttribute("design") Taco design, BindingResult result, @ModelAttribute TacoOrder tacoOrder){
+        if(result.hasErrors()){
             return "design";
         }else {
             log.info("Processing design : " + design);

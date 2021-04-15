@@ -15,6 +15,5 @@ import java.util.List;
 @Transactional
 public interface OrderRepository extends JpaRepository<TacoOrder,Long> {
 
-    @Query(value = "SELECT * FROM tacoorder where user_id =? ORDER BY createdAt desc;",nativeQuery = true)
-    List<TacoOrder> findOrderbyUserOrderByCreatedAtDesc(User user, Pageable pageable);
+    List<TacoOrder> findTacoOrderbyUserOrderByCreatedAtDesc(User user, Pageable pageable);
 }
