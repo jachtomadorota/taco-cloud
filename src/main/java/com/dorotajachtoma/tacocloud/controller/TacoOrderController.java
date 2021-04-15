@@ -56,7 +56,7 @@ public class TacoOrderController {
     @GetMapping
     public String ordersForUser(@AuthenticationPrincipal User user, Model model){
         Pageable pageable = PageRequest.of(0,20);
-        model.addAttribute("order",orderRepository.findTacoOrderbyUserOrderByCreatedAtDesc(user,pageable));
+        model.addAttribute("order",orderRepository.findByUser(user,pageable));
         return "orderList";
     }
 }

@@ -15,5 +15,5 @@ import java.util.List;
 @Transactional
 public interface OrderRepository extends JpaRepository<TacoOrder,Long> {
 
-    List<TacoOrder> findTacoOrderbyUserOrderByCreatedAtDesc(User user, Pageable pageable);
+    List<TacoOrder> findByUser(User user, Pageable pageable);
 }
