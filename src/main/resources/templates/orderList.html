@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>TacoCloud - design your own taco</title>
+</head>
+
+<body>
+<h1>Design your own taco!</h1>
+<img th:src="@{/images/TacoCloud.png}">
+
+<form method="POST" th:action="@{/logout}">
+    <input type="submit" value="Logout">
+</form>
+<br/>
+<table>
+    <thead>
+    <tr>
+           <th>Name</th>
+         <th>Street</th>
+         <th>City</th>
+         <th>State</th>
+         <th>Credit Card Number</th>
+          <th>Credit Card Expiration Date</th>
+         <th>Credit Card CVV</th>
+        <th>Created at</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${order}">
+        <td th:text="${order.name}"></td>
+        <td th:text="${order.street}"></td>
+        <td th:text="${order.city}"></td>
+        <td th:text="${order.state}"></td>
+        <td th:text="${order.ccNumber}"></td>
+        <td th:text="${order.ccExpiration}"></td>
+        <td th:text="${order.ccCVV}"></td>
+        <td th:text="${order.createdAt}"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>
