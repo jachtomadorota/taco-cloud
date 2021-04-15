@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -51,12 +53,12 @@ public class DesignTacoController {
     }
 
     @GetMapping(value="/{id}")
-    public Taco getOneTaco(@PathVariable Long id){
+    public ResponseEntity<Taco> getOneTaco(@PathVariable Long id){
         Optional<Taco> taco = tacoRepository.findById(id);
         if (taco.isEmpty()) {
-            return null;
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }else{
-            return taco.get();
+            return new ResponseEntity<>(taco.get(),HttpStatus.OK);
         }
     }
 
