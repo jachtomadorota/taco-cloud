@@ -20,9 +20,11 @@ import java.util.stream.Collectors;
 public class DesignTacoController {
 
     private final IngredientRepository ingredientRepository;
+    private final TacoRepository tacoRepository;
 
-    public DesignTacoController(IngredientRepository ingredientRepository) {
+    public DesignTacoController(IngredientRepository ingredientRepository, TacoRepository tacoRepository) {
         this.ingredientRepository = ingredientRepository;
+        this.tacoRepository = tacoRepository;
     }
 
     @GetMapping
@@ -35,5 +37,17 @@ public class DesignTacoController {
         }
         model.addAttribute("design", new Taco());
         return "design";
+    }
+
+
+    @PostMapping
+    public String processDesign(@Valid @ModelAttribute("design") Taco design, BindingResult result, @ModelAttribute TacoOrder tacoOrder){
+        if(result.hasErrors()){
+            return "design";
+        }else {
+            log.info("Processing design : " + design);
+            tacoRepository.save(design);
+        }
+        return "redirect:/orders/current";
     }
 }
