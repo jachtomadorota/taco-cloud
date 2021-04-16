@@ -5,6 +5,7 @@ import com.dorotajachtoma.tacocloud.model.Taco;
 import com.dorotajachtoma.tacocloud.model.TacoOrder;
 import com.dorotajachtoma.tacocloud.repository.OrderRepository;
 import com.dorotajachtoma.tacocloud.repository.TacoRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -73,5 +74,13 @@ public class TacoRestController {
         }else{
             return null;
         }
+    }
+
+    @DeleteMapping(value = "/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void deleteOrder(@PathVariable("id") Long id){
+        try{
+            orderRepository.deleteById(id);
+        }catch(EmptyResultDataAccessException e);
     }
 }
