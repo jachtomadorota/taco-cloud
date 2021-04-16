@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/design-rest",produces = "application/json")
+@RequestMapping(value = "/design",produces = "application/json")
 @CrossOrigin(value = "*")
 public class TacoRestController {
 

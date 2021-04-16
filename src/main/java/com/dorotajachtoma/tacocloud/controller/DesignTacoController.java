@@ -20,22 +20,20 @@ import java.util.stream.Collectors;
 public class DesignTacoController {
 
     private final IngredientRepository ingredientRepository;
-    private final TacoRepository tacoRepository;
 
-    public DesignTacoController(IngredientRepository ingredientRepository, TacoRepository tacoRepository) {
+    public DesignTacoController(IngredientRepository ingredientRepository) {
         this.ingredientRepository = ingredientRepository;
-        this.tacoRepository = tacoRepository;
     }
 
+    @GetMapping
+    public String showDesignForm(Model model){
 
-    @PostMapping
-    public String processDesign(@Valid @ModelAttribute("design") Taco design, BindingResult result, @ModelAttribute TacoOrder tacoOrder){
-        if(result.hasErrors()){
-            return "design";
-        }else {
-            log.info("Processing design : " + design);
-            tacoRepository.save(design);
+        Ingredient.Type[] types = Ingredient.Type.values();
+        for(Ingredient.Type type : types){
+            model.addAttribute(type.toString().toLowerCase(),
+                    ingredientRepository.findAll().stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList()));
         }
-        return "redirect:/orders/current";
+        model.addAttribute("design", new Taco());
+        return "design";
     }
 }
