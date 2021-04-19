@@ -5,6 +5,8 @@ import com.dorotajachtoma.tacocloud.model.Taco;
 import com.dorotajachtoma.tacocloud.model.TacoOrder;
 import com.dorotajachtoma.tacocloud.repository.OrderRepository;
 import com.dorotajachtoma.tacocloud.repository.TacoRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.eclipse.persistence.logging.SessionLog;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -17,6 +19,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "/design",produces = "application/json")
 @CrossOrigin(value = "*")
+@Slf4j
 public class TacoRestController {
 
     private final TacoRepository tacoRepository;
@@ -78,9 +81,11 @@ public class TacoRestController {
 
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteOrder(@PathVariable("id") Long id){
+    public void deleteOrder(@PathVariable("id") Long idg){
         try{
             orderRepository.deleteById(id);
-        }catch(EmptyResultDataAccessException e);
+        }catch(EmptyResultDataAccessException e){
+            log.info("EmptyResultDataAccessException is thrown");
+        }
     }
 }
