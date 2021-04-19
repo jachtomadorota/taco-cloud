@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +42,7 @@ public class TacoRestController {
         PageRequest page = PageRequest.of(0,12, Sort.by("createdAt").descending());
         List<Taco> tacos = tacoRepository.findAll(page).getContent();
         CollectionModel<EntityModel<Taco>> tacosCollection = CollectionModel.wrap(tacos);
-        tacosCollection.add(new Link("http://localhost:8080/design/recent", "recents"));
+        tacosCollection.add(WebMvcLinkBuilder.linkTo(TacoRestController.class).slash("recent").withRel("recents"));
         return tacosCollection;
     }
 
