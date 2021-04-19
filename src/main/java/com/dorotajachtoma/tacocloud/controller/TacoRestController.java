@@ -10,10 +10,16 @@ import org.eclipse.persistence.logging.SessionLog;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+import javax.annotation.Resources;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -31,9 +37,12 @@ public class TacoRestController {
     }
 
     @GetMapping(value = "/recent")
-    public Iterable<Taco> recentTacos(){
+    public CollectionModel<EntityModel<Taco>> recentTacos(){
         PageRequest page = PageRequest.of(0,12, Sort.by("createdAt").descending());
-        return tacoRepository.findAll(page).getContent();
+        List<Taco> tacos = tacoRepository.findAll(page).getContent();
+        CollectionModel<EntityModel<Taco>> tacosCollection = CollectionModel.wrap(tacos);
+        tacosCollection.add(new Link("http://localhost:8080/design/recent", "recents"));
+        return tacosCollection;
     }
 
     @GetMapping(value="/{id}")
@@ -81,7 +90,7 @@ public class TacoRestController {
 
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteOrder(@PathVariable("id") Long idg){
+    public void deleteOrder(@PathVariable("id") Long id){
         try{
             orderRepository.deleteById(id);
         }catch(EmptyResultDataAccessException e){
