@@ -4,6 +4,7 @@ package com.dorotajachtoma.tacocloud.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@RestResource(rel="tacos",path = "tacos")
 public class Taco {
 
     @Id
