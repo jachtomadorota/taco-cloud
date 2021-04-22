@@ -27,16 +27,17 @@ public class TacoRestTemplateController {
         this.template = template;
     }
 
+    @GetMapping(value = "/get")
     public Ingredient getIngredientById(String ingredientId){
-        return template.getForObject("http://localhost:8080/taco-rest-template/{id}",Ingredient.class,ingredientId);
+        return template.getForObject("http://localhost:8080/taco-rest-template/get/{id}",Ingredient.class,ingredientId);
     }
 
     @GetMapping(value = "/hashmap")
     public Ingredient getIngredientByIdHashMap(String ingredientId){
-        Map<String,String> urlVaribles = new HashMap<>();
-        urlVaribles.put("id",ingredientId);
+        Map<String,String> urlVariables = new HashMap<>();
+        urlVariables.put("id",ingredientId);
         URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/taco-rest-template/hashmap/{id}")
-                .build(urlVaribles);
+                .build(urlVariables);
         return template.getForObject(uri,Ingredient.class);
     }
 
@@ -47,6 +48,10 @@ public class TacoRestTemplateController {
         log.info("Fetch time :"  + responseEntity.getHeaders().getDate());
 
         return responseEntity.getBody();
+    }
+
+    public void updateIngredient(Ingredient ingredient){
+        template.put("http://localhost:8080/taco-rest-template/{id}",ingredient,ingredient.getId());
     }
 
 
