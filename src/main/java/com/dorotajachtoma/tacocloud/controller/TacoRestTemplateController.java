@@ -54,5 +54,9 @@ public class TacoRestTemplateController {
         template.put("http://localhost:8080/taco-rest-template/{id}",ingredient,ingredient.getId());
     }
 
+    public void delete(Ingredient ingredient){
+        template.delete("http://localhost:8080/taco-rest-template/{id}",ingredient.getId());
+    }
+
 
 }
