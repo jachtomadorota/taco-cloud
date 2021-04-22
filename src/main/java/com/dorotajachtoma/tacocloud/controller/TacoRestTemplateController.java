@@ -3,6 +3,8 @@ package com.dorotajachtoma.tacocloud.controller;
 
 import com.dorotajachtoma.tacocloud.model.Ingredient;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.hateoas.MediaTypes;
+import org.springframework.hateoas.client.Traverson;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -71,6 +73,12 @@ public class TacoRestTemplateController {
         log.info("Fetching new object..."  + responseEntity.getHeaders().getLocation());
 
         return responseEntity.getBody();
+    }
+
+    private Ingredient addIngredient(Ingredient ingredient){
+        Traverson traverson = new Traverson(URI.create("http://localhost:8080/api"),MediaTypes.HAL_JSON);
+        String ingredientUrl = traverson.follow("ingredients").asLink().getHref();
+        return template.postForObject(ingredientUrl,ingredient,Ingredient.class);
     }
 
 
