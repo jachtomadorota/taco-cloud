@@ -58,5 +58,10 @@ public class TacoRestTemplateController {
         template.delete("http://localhost:8080/taco-rest-template/{id}",ingredient.getId());
     }
 
+    @GetMapping(value = "/ingredients")
+    public Ingredient createIngredient(Ingredient ingredient){
+        return  template.postForObject("http://localhost:8080/taco-rest-tamplate/ingredients",ingredient,Ingredient.class);
+    }
+
 
 }
