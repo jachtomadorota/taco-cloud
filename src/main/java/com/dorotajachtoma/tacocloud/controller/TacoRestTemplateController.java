@@ -60,7 +60,17 @@ public class TacoRestTemplateController {
 
     @GetMapping(value = "/ingredients")
     public Ingredient createIngredient(Ingredient ingredient){
-        return  template.postForObject("http://localhost:8080/taco-rest-tamplate/ingredients",ingredient,Ingredient.class);
+        return  template.postForObject("http://localhost:8080/taco-rest-template/ingredients",ingredient,Ingredient.class);
+    }
+
+    @GetMapping(value = "/ingredients/response-entity")
+    public Ingredient createIngredientByResponseEntity(Ingredient ingredient){
+        ResponseEntity<Ingredient> responseEntity = template.postForEntity("http://localhost:8080/taco-rest-template/ingredients/response-entity"
+        ,ingredient,Ingredient.class);
+
+        log.info("Fetching new object..."  + responseEntity.getHeaders().getLocation());
+
+        return responseEntity.getBody();
     }
 
 
