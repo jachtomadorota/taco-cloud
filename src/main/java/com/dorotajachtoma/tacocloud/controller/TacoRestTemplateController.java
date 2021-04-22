@@ -3,6 +3,7 @@ package com.dorotajachtoma.tacocloud.controller;
 
 import com.dorotajachtoma.tacocloud.model.Ingredient;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +38,15 @@ public class TacoRestTemplateController {
         URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/taco-rest-template/hashmap/{id}")
                 .build(urlVaribles);
         return template.getForObject(uri,Ingredient.class);
+    }
+
+    @GetMapping(value = "/response-entity")
+    public Ingredient getIngredientByIdResponseEntity(String ingredientId){
+        ResponseEntity<Ingredient> responseEntity = template.getForEntity("http://localhost:8080/taco-rest-template/response-entity/{id}"
+        ,Ingredient.class,ingredientId);
+        log.info("Fetch time :"  + responseEntity.getHeaders().getDate());
+
+        return responseEntity.getBody();
     }
 
 
