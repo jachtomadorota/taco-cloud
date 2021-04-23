@@ -12,10 +12,6 @@ import javax.jms.Destination;
 @Service
 public class JmsOrderMessagingService implements OrderMessagingService {
 
-    @Bean
-    public Destination orderQueue(){
-        return new ActiveMQQueue("taco-cloud.order.queue");
-    }
 
     private final JmsTemplate jms;
 
